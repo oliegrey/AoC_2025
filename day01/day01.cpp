@@ -1,7 +1,9 @@
 #include "day01.h"
 
-std::string Day01::solve_part1() {
+#include <fstream>
 
+std::string Day01::solve_part1() {
+	
 }
 
 std::string Day01::solve_part2() {
