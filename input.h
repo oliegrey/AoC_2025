@@ -10,7 +10,7 @@
 namespace Input {
 	enum class ParseRule {
 		none,
-		negateRStart
+		negateLStart
 	};
 
 	template <typename T>
@@ -29,8 +29,8 @@ namespace Input {
 
 			if (!line.empty()) {
 				switch (rule) {
-				case ParseRule::negateRStart:
-						negateValue = (line[0] == 'R');
+				case ParseRule::negateLStart:
+						negateValue = (line[0] == 'L');
 						line = line.substr(1);
 				}
 
