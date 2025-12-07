@@ -12,9 +12,7 @@ private:
 		const int maxRotation{ 100 };
 
 		static std::vector<int> comboDeltas{
-			Input::loadTextLines<int>(
-				"day01/p1_input.txt", Input::ParseRule::negateLStart
-			)
+			Input::getNegatedLStart("day01/input.txt")
 		};
 
 		int zeroCount{ 0 };
