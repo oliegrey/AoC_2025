@@ -8,34 +8,38 @@
 
 class Day01 {
 private:
-	static std::string countCombinationZeros(bool countPasses) {
-		int zero_count{ 0 };
-		int combination_value{ 50 };
+	static int countCombinationZeros(bool countPasses) {
+		const int maxRotation{ 100 };
 
-		std::vector<int> combination_movements{
+		static std::vector<int> comboDeltas{
 			Input::loadTextLines<int>(
 				"day01/p1_input.txt", Input::ParseRule::negateLStart
 			)
 		};
 
-		for (int i : combination_movements) {
-			combination_value += i;
-			
-			while (combination_value > 99) {
-				if (countPasses) { zero_count += 1; }
-				combination_value -= 100;
+		int zeroCount{ 0 };
+		int comboValue{ 50 };
+
+		for (int comboDelta: comboDeltas) {
+			comboValue += comboDelta;
+
+			if (countPasses) {
+				zeroCount += abs(comboValue / maxRotation);
+
+				if (comboValue <= 0 && comboValue - comboDelta > 0) {
+					++zeroCount;
+				}
 			}
-			while (combination_value < 0) {
-				if (countPasses) { zero_count += 1; }
-				combination_value += 100;
-			}
-			if (combination_value == 0) { zero_count += 1; }
+
+			comboValue %= maxRotation;
+			if (comboValue < 0) { comboValue = 100 + comboValue; }
+			else if (!countPasses && comboValue == 0) { ++zeroCount; }
 		}
 
-		return std::to_string(zero_count);
+		return zeroCount;
 	}
 
 public:
-	static std::string solvePart1() { return countCombinationZeros(false); }
-	static std::string solvePart2() { return countCombinationZeros(true); }
+	static int solvePart1() { return countCombinationZeros(false); }
+	static int solvePart2() { return countCombinationZeros(true); }
 };

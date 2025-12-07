@@ -30,8 +30,8 @@ namespace Input {
 			if (!line.empty()) {
 				switch (rule) {
 				case ParseRule::negateLStart:
-						negateValue = (line[0] == 'L');
-						line = line.substr(1);
+					negateValue = (line[0] == 'L');
+					line = line.substr(1);
 				}
 
 				std::stringstream line_sstream{line};
